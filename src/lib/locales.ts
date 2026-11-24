@@ -4,7 +4,7 @@ export const locales = ["en", "es"] as const;
 
 export type Locale = (typeof locales)[number];
 
-export type LocalizedPage = "home" | "experience" | "projects" | `projects/${ProjectId}`;
+export type LocalizedPage = "home" | "experience" | "projects" | "about" | "contact" | `projects/${ProjectId}`;
 
 export function localizedHref(locale: Locale, page: LocalizedPage) {
   return page === "home" ? `/${locale}` : `/${locale}/${page}`;

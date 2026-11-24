@@ -4,8 +4,10 @@ import { notFound } from "next/navigation";
 import { ExperienceList } from "@/components/experience-list";
 import { ProjectList } from "@/components/project-list";
 import { SiteShell } from "@/components/site-shell";
+import { TechnicalExpertise } from "@/components/technical-expertise";
 import { experienceCopy } from "@/content/experience";
 import { homeCopy, profile } from "@/content/home";
+import { aboutCopy, contactCopy, contactProfiles } from "@/content/profile-pages";
 import { projectLabels } from "@/content/projects";
 import { isLocale, localizedHref } from "@/lib/locales";
 
@@ -16,6 +18,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]">): Prom
   return {
     title: `${profile.name} — ${homeCopy[locale].metadataTitle}`,
     description: homeCopy[locale].description,
+    alternates: { canonical: localizedHref(locale, "home") },
   };
 }
 
@@ -25,6 +28,8 @@ export default async function LocaleHome({ params }: PageProps<"/[locale]">) {
   const { headline, description } = homeCopy[locale];
   const experience = experienceCopy[locale];
   const work = projectLabels[locale];
+  const about = aboutCopy[locale];
+  const contact = contactCopy[locale];
 
   return (
     <SiteShell locale={locale}>
@@ -56,6 +61,29 @@ export default async function LocaleHome({ params }: PageProps<"/[locale]">) {
         <Link href={localizedHref(locale, "projects")} className="mt-4 inline-flex min-h-11 items-center gap-2 font-medium text-accent underline underline-offset-4 hover:text-foreground">
           {work.viewAll} <span aria-hidden="true">→</span>
         </Link>
+      </section>
+      <section aria-labelledby="about-heading" className="mt-[var(--section-space)]">
+        <p className="font-mono text-sm tracking-wide text-accent uppercase">{about.label}</p>
+        <h2 id="about-heading" className="mt-3 mb-4 font-display text-3xl font-semibold tracking-tight md:text-4xl">
+          {about.title}
+        </h2>
+        <p className="editorial-body max-w-[60ch] text-pretty text-muted">{about.summary}</p>
+        <Link href={localizedHref(locale, "about")} className="mt-4 inline-flex min-h-11 items-center gap-2 font-medium text-accent underline underline-offset-4 hover:text-foreground">
+          {about.action} <span aria-hidden="true">→</span>
+        </Link>
+      </section>
+      <TechnicalExpertise locale={locale} compact />
+      <section aria-labelledby="contact-heading" className="mt-[var(--section-space)] border-t border-border pt-8 md:pt-12">
+        <p className="font-mono text-sm tracking-wide text-accent uppercase">{contact.label}</p>
+        <h2 id="contact-heading" className="mt-3 mb-4 font-display text-3xl font-semibold tracking-tight md:text-4xl">
+          {contact.title}
+        </h2>
+        <p className="editorial-body max-w-[60ch] text-pretty text-muted">{contact.summary}</p>
+        {contactProfiles.length > 0 && (
+          <Link href={localizedHref(locale, "contact")} className="mt-4 inline-flex min-h-11 items-center gap-2 font-medium text-accent underline underline-offset-4 hover:text-foreground">
+            {contact.action} <span aria-hidden="true">→</span>
+          </Link>
+        )}
       </section>
     </SiteShell>
   );

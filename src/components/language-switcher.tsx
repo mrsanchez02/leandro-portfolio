@@ -7,12 +7,12 @@ export function LanguageSwitcher({
   page = "home",
 }: {
   label: string;
-  locale?: Locale;
+  locale: Locale;
   page?: LocalizedPage;
 }) {
   return (
     <nav aria-label={label}>
-      <ul className="flex flex-wrap items-center gap-x-5 gap-y-2">
+      <ul role="list" className="flex items-center">
         {locales.map((language) => {
           const current = language === locale;
           return (
@@ -21,14 +21,15 @@ export function LanguageSwitcher({
                 href={localizedHref(language, page)}
                 hrefLang={language}
                 lang={language}
+                aria-label={languageNames[language]}
                 aria-current={current ? "page" : undefined}
-                className={`inline-flex min-h-11 items-center font-medium underline-offset-4 hover:text-accent hover:underline ${
-                  current || (!locale && language === "en")
+                className={`inline-flex min-h-11 min-w-11 items-center justify-center font-mono text-sm font-medium uppercase underline-offset-4 hover:text-accent hover:underline ${
+                  current
                     ? "text-accent underline"
                     : "text-muted"
                 }`}
               >
-                {languageNames[language]}
+                {language}
               </Link>
             </li>
           );
