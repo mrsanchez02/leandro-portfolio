@@ -1,26 +1,70 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-background: #111418;
+  --color-surface: #1b2026;
+  --color-foreground: #f2f1ed;
+  --color-muted: #aab4bb;
+  --color-accent: #77bba5;
+  --color-border: #353b42;
+  --container-site: 1120px;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-display: var(--font-geist-sans);
+  --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+:root {
+  color-scheme: dark;
+  --page-gutter: clamp(20px, 5vw, 24px);
+  --section-space: 64px;
+  --hero-size: clamp(2.375rem, 7vw, 2.75rem);
+  --body-size: clamp(1rem, 3vw, 1.125rem);
+}
+
+@media (width >= 48rem) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --page-gutter: clamp(32px, 4vw, 48px);
+    --section-space: 112px;
+    --hero-size: clamp(4rem, 6vw, 4.75rem);
+    --body-size: clamp(1.125rem, 1.6vw, 1.25rem);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+  }
+}
+
+@utility page-container {
+  width: min(calc(100% - 2 * var(--page-gutter)), var(--container-site));
+  margin-inline: auto;
+}
+
+@utility editorial-section {
+  padding-block: var(--section-space);
+}
+
+@utility hero-heading {
+  font-size: var(--hero-size);
+  line-height: 1.04;
+  letter-spacing: -0.055em;
+  font-weight: 600;
+}
+
+@utility editorial-body {
+  font-size: var(--body-size);
+  line-height: 1.65;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
 }
