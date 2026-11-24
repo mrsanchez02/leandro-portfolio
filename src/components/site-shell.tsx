@@ -1,13 +1,16 @@
 import type { ReactNode } from "react";
+import { experienceCopy } from "@/content/experience";
 import { homeCopy, profile } from "@/content/home";
-import type { Locale } from "@/lib/locales";
+import { localizedHref, type Locale, type LocalizedPage } from "@/lib/locales";
 import { LanguageSwitcher } from "./language-switcher";
 
 export function SiteShell({
   locale,
+  page = "home",
   children,
 }: {
   locale?: Locale;
+  page?: LocalizedPage;
   children: ReactNode;
 }) {
   const copy = homeCopy[locale ?? "en"];
@@ -25,12 +28,23 @@ export function SiteShell({
           {locale ? (
             <>
               <a
-                href={`/${locale}`}
+                href={localizedHref(locale, "home")}
                 className="inline-flex min-h-11 items-center font-display text-lg font-semibold tracking-tight hover:text-accent"
               >
                 {profile.name}<span className="sr-only"> — {copy.homeLabel}</span>
               </a>
-              <LanguageSwitcher label={copy.languageLabel} locale={locale} />
+              <div className="flex flex-wrap items-center gap-x-6">
+                <nav aria-label={copy.navigationLabel}>
+                  <a
+                    href={localizedHref(locale, "experience")}
+                    aria-current={page === "experience" ? "page" : undefined}
+                    className="inline-flex min-h-11 items-center font-medium text-muted underline-offset-4 hover:text-accent hover:underline aria-[current=page]:text-accent aria-[current=page]:underline"
+                  >
+                    {experienceCopy[locale].navLabel}
+                  </a>
+                </nav>
+                <LanguageSwitcher label={copy.languageLabel} locale={locale} page={page} />
+              </div>
             </>
           ) : (
             <span className="font-display text-lg font-semibold tracking-tight">{profile.name}</span>

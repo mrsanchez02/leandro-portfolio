@@ -14,6 +14,7 @@ export const homeCopy = {
     languageLabel: "Language",
     skipLink: "Skip to content",
     homeLabel: "Home",
+    navigationLabel: "Main navigation",
   },
   es: {
     metadataTitle: "Ingeniero de software full stack",
@@ -23,6 +24,7 @@ export const homeCopy = {
     languageLabel: "Idioma",
     skipLink: "Ir al contenido",
     homeLabel: "Inicio",
+    navigationLabel: "Navegación principal",
   },
 } satisfies Record<
   Locale,
@@ -33,5 +35,6 @@ export const homeCopy = {
     languageLabel: string;
     skipLink: string;
     homeLabel: string;
+    navigationLabel: string;
   }
 >;

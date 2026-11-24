@@ -1,11 +1,13 @@
-import { languageNames, locales, type Locale } from "@/lib/locales";
+import { languageNames, locales, localizedHref, type Locale, type LocalizedPage } from "@/lib/locales";
 
 export function LanguageSwitcher({
   label,
   locale,
+  page = "home",
 }: {
   label: string;
   locale?: Locale;
+  page?: LocalizedPage;
 }) {
   return (
     <nav aria-label={label}>
@@ -15,7 +17,7 @@ export function LanguageSwitcher({
           return (
             <li key={language}>
               <a
-                href={`/${language}`}
+                href={localizedHref(language, page)}
                 hrefLang={language}
                 lang={language}
                 aria-current={current ? "page" : undefined}
