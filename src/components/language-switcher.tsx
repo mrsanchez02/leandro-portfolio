@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { languageNames, locales, localizedHref, type Locale, type LocalizedPage } from "@/lib/locales";
 
 export function LanguageSwitcher({
@@ -16,7 +17,7 @@ export function LanguageSwitcher({
           const current = language === locale;
           return (
             <li key={language}>
-              <a
+              <Link
                 href={localizedHref(language, page)}
                 hrefLang={language}
                 lang={language}
@@ -28,7 +29,7 @@ export function LanguageSwitcher({
                 }`}
               >
                 {languageNames[language]}
-              </a>
+              </Link>
             </li>
           );
         })}

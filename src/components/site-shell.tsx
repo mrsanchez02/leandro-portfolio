@@ -1,6 +1,8 @@
+import Link from "next/link";
 import type { ReactNode } from "react";
 import { experienceCopy } from "@/content/experience";
 import { homeCopy, profile } from "@/content/home";
+import { projectLabels } from "@/content/projects";
 import { localizedHref, type Locale, type LocalizedPage } from "@/lib/locales";
 import { LanguageSwitcher } from "./language-switcher";
 
@@ -27,21 +29,32 @@ export function SiteShell({
         <div className="page-container flex min-h-20 flex-wrap items-center justify-between gap-x-6 py-3">
           {locale ? (
             <>
-              <a
+              <Link
                 href={localizedHref(locale, "home")}
                 className="inline-flex min-h-11 items-center font-display text-lg font-semibold tracking-tight hover:text-accent"
               >
                 {profile.name}<span className="sr-only"> — {copy.homeLabel}</span>
-              </a>
+              </Link>
               <div className="flex flex-wrap items-center gap-x-6">
-                <nav aria-label={copy.navigationLabel}>
-                  <a
+                <nav aria-label={copy.navigationLabel} className="flex flex-wrap items-center gap-x-5">
+                  <Link
                     href={localizedHref(locale, "experience")}
                     aria-current={page === "experience" ? "page" : undefined}
                     className="inline-flex min-h-11 items-center font-medium text-muted underline-offset-4 hover:text-accent hover:underline aria-[current=page]:text-accent aria-[current=page]:underline"
                   >
                     {experienceCopy[locale].navLabel}
-                  </a>
+                  </Link>
+                  <Link
+                    href={localizedHref(locale, "projects")}
+                    aria-current={page === "projects" ? "page" : undefined}
+                    className={`inline-flex min-h-11 items-center font-medium underline-offset-4 hover:text-accent hover:underline ${
+                      page === "projects" || page.startsWith("projects/")
+                        ? "text-accent underline"
+                        : "text-muted"
+                    }`}
+                  >
+                    {projectLabels[locale].nav}
+                  </Link>
                 </nav>
                 <LanguageSwitcher label={copy.languageLabel} locale={locale} page={page} />
               </div>
