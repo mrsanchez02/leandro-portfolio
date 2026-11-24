@@ -6,7 +6,7 @@ export const aboutCopy = {
     label: "03 / About",
     title: "About me",
     summary: "I build enterprise web and mobile applications and connect the systems behind them.",
-    intro: "I’m a Full Stack Software Engineer based in the Dominican Republic. My work spans enterprise web and mobile applications, backend APIs, and system integration.",
+    intro: "I work in full stack software development from the Dominican Republic. I build enterprise web and mobile applications, develop backend APIs, and integrate systems to solve problems in day-to-day business operations.",
     approach: "I start by understanding where a process breaks down. That guides the architecture: what to automate, where AI can help, and what to keep simple so the software is easier to maintain and operate.",
     action: "More about me",
   },
@@ -15,7 +15,7 @@ export const aboutCopy = {
     label: "03 / Perfil",
     title: "Sobre mí",
     summary: "Desarrollo aplicaciones web y móviles empresariales e integro los sistemas que las sustentan.",
-    intro: "Soy ingeniero de software full stack y vivo en República Dominicana. Mi trabajo abarca aplicaciones web y móviles empresariales, APIs de backend e integración de sistemas.",
+    intro: "Me dedico al desarrollo de software full stack desde República Dominicana. Creo aplicaciones web y móviles empresariales, desarrollo APIs de backend e integro sistemas para resolver problemas en la operación diaria de las empresas.",
     approach: "Empiezo por entender dónde falla un proceso. Eso orienta la arquitectura: qué automatizar, dónde puede ayudar la IA y qué conviene mantener simple para facilitar el mantenimiento y la operación del software.",
     action: "Más sobre mí",
   },
@@ -30,6 +30,8 @@ export const contactCopy = {
     description: "Connect with Leandro Sánchez about software engineering roles or independent consulting.",
     action: "Get in touch",
     profiles: "Online profiles",
+    email: "Send an email",
+    resumes: "Download résumé",
   },
   es: {
     title: "Contacto",
@@ -39,8 +41,16 @@ export const contactCopy = {
     description: "Contacta a Leandro Sánchez para hablar sobre puestos de ingeniería de software o consultoría independiente.",
     action: "Ponerse en contacto",
     profiles: "Perfiles en línea",
+    email: "Enviar un correo",
+    resumes: "Descargar currículum",
   },
 } satisfies Record<Locale, Record<string, string>>;
+
+// Only configure a public contact email and approved PDFs stored under public/.
+export const contactDestinations: {
+  email?: string;
+  resumes?: Partial<Record<Locale, `/${string}.pdf`>>;
+} = {};
 
 export const contactProfiles: readonly { name: string; href: `https://${string}` }[] = [
   { name: "LinkedIn", href: "https://do.linkedin.com/in/jsanchez-castillo" },

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { expertise, expertiseCopy } from "@/content/expertise";
+import { expertise, expertiseCopy, expertiseGroups } from "@/content/expertise";
 import { localizedHref, type Locale } from "@/lib/locales";
 
 const sectionId = "technical-expertise";
@@ -24,20 +24,22 @@ export function TechnicalExpertise({ locale, compact = false }: { locale: Locale
         </>
       ) : (
         <div className="grid gap-x-10 border-b border-border md:grid-cols-2">
-          {expertise.map(({ title, applied, additional }) => (
+          {expertise.map(({ title, skills }) => (
             <section key={title.en} className="border-t border-border py-6 md:py-8">
               <h3 className="font-display text-xl font-semibold tracking-tight">{title[locale]}</h3>
               <dl className="mt-4 space-y-4">
-                {(["applied", "additional"] as const).map((group) => (
-                  <div key={group}>
-                    <dt className={`font-mono text-sm ${group === "applied" ? "text-accent" : "text-muted"}`}>{copy[group]}</dt>
-                    <dd className="mt-1 text-pretty">
-                      {(group === "applied" ? applied : additional)
-                        .map((item) => typeof item === "string" ? item : item[locale])
-                        .join(", ")}
-                    </dd>
-                  </div>
-                ))}
+                {expertiseGroups.map((group) => {
+                  const items = skills[group];
+                  if (!items?.length) return null;
+                  return (
+                    <div key={group}>
+                      <dt className={`font-mono text-sm ${group === "applied" ? "text-accent" : "text-muted"}`}>{copy[group]}</dt>
+                      <dd className="mt-1 text-pretty">
+                        {items.map((item) => typeof item === "string" ? item : item[locale]).join(", ")}
+                      </dd>
+                    </div>
+                  );
+                })}
               </dl>
             </section>
           ))}
