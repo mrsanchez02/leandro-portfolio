@@ -7,6 +7,11 @@ function productionOrigin() {
   const configured = process.env.SITE_URL?.trim();
   if (!configured) return;
 
+  // Vercel supplies the production hostname on deployments, not on plain local builds.
+  const isLocalProduction = process.env.NODE_ENV === "production" && !process.env.VERCEL && !process.env.VERCEL_ENV;
+  const productionHost = process.env.VERCEL_PROJECT_PRODUCTION_URL ??
+    (isLocalProduction ? "mrsanchez-dev-portfolio.vercel.app" : undefined);
+
   const url = URL.canParse(configured) ? new URL(configured) : undefined;
   const host = url?.hostname;
   if (
@@ -15,7 +20,7 @@ function productionOrigin() {
     !/^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+(?:[a-z]{2,63}|xn--[a-z0-9-]{1,59})$/.test(host) ||
     /(?:^|\.)(?:localhost|local|internal|test|invalid|example)$/.test(host) ||
     /(?:^|\.)example\.(?:com|net|org)$/.test(host) ||
-    (host.endsWith(".vercel.app") && host !== process.env.VERCEL_PROJECT_PRODUCTION_URL)
+    (host.endsWith(".vercel.app") && host !== productionHost)
   ) {
     throw new Error("SITE_URL must be the public HTTPS production origin (no path, port, or preview hostname).");
   }
