@@ -4,7 +4,8 @@ import { SiteShell } from "@/components/site-shell";
 import { TechnicalExpertise } from "@/components/technical-expertise";
 import { profile } from "@/content/home";
 import { aboutCopy } from "@/content/profile-pages";
-import { isLocale, localizedHref } from "@/lib/locales";
+import { isLocale } from "@/lib/locales";
+import { pageMetadata } from "@/lib/seo";
 
 type AboutPageProps = PageProps<"/[locale]/about">;
 
@@ -13,11 +14,7 @@ export async function generateMetadata({ params }: AboutPageProps): Promise<Meta
   if (!isLocale(locale)) notFound();
   const copy = aboutCopy[locale];
 
-  return {
-    title: `${copy.title} — ${profile.name}`,
-    description: copy.intro,
-    alternates: { canonical: localizedHref(locale, "about") },
-  };
+  return pageMetadata(locale, "about", `${copy.title} — ${profile.name}`, copy.intro);
 }
 
 export default async function AboutPage({ params }: AboutPageProps) {

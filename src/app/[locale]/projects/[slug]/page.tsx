@@ -6,6 +6,7 @@ import { SiteShell } from "@/components/site-shell";
 import { profile } from "@/content/home";
 import { isProjectId, projectIds, projectLabels, projects } from "@/content/projects";
 import { isLocale, localizedHref } from "@/lib/locales";
+import { pageMetadata } from "@/lib/seo";
 
 type ProjectPageProps = PageProps<"/[locale]/projects/[slug]">;
 
@@ -20,7 +21,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   if (!isLocale(locale) || !isProjectId(slug)) notFound();
 
   const { name, overview } = projects[slug].copy[locale];
-  return { title: `${name} — ${profile.name}`, description: overview };
+  return pageMetadata(locale, `projects/${slug}`, `${name} — ${profile.name}`, overview);
 }
 
 function CaseStudySection({ title, children }: { title: string; children: ReactNode }) {

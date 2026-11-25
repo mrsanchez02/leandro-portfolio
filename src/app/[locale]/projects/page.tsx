@@ -5,6 +5,7 @@ import { SiteShell } from "@/components/site-shell";
 import { profile } from "@/content/home";
 import { projectLabels } from "@/content/projects";
 import { isLocale } from "@/lib/locales";
+import { pageMetadata } from "@/lib/seo";
 
 type ProjectsPageProps = PageProps<"/[locale]/projects">;
 
@@ -13,7 +14,7 @@ export async function generateMetadata({ params }: ProjectsPageProps): Promise<M
   if (!isLocale(locale)) notFound();
 
   const { title, description } = projectLabels[locale];
-  return { title: `${title} — ${profile.name}`, description };
+  return pageMetadata(locale, "projects", `${title} — ${profile.name}`, description);
 }
 
 export default async function ProjectsPage({ params }: ProjectsPageProps) {

@@ -2,24 +2,23 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ExperienceList } from "@/components/experience-list";
+import { PersonJsonLd } from "@/components/person-json-ld";
 import { ProjectList } from "@/components/project-list";
 import { SiteShell } from "@/components/site-shell";
 import { TechnicalExpertise } from "@/components/technical-expertise";
 import { experienceCopy } from "@/content/experience";
 import { homeCopy, profile } from "@/content/home";
-import { aboutCopy, contactCopy, contactProfiles } from "@/content/profile-pages";
+import { aboutCopy, contactCopy } from "@/content/profile-pages";
 import { projectLabels } from "@/content/projects";
 import { isLocale, localizedHref } from "@/lib/locales";
+import { pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]">): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
 
-  return {
-    title: `${profile.name} — ${homeCopy[locale].metadataTitle}`,
-    description: homeCopy[locale].description,
-    alternates: { canonical: localizedHref(locale, "home") },
-  };
+  const { metadataTitle, description } = homeCopy[locale];
+  return pageMetadata(locale, "home", `${profile.name} — ${metadataTitle}`, description);
 }
 
 export default async function LocaleHome({ params }: PageProps<"/[locale]">) {
@@ -33,6 +32,7 @@ export default async function LocaleHome({ params }: PageProps<"/[locale]">) {
 
   return (
     <SiteShell locale={locale}>
+      <PersonJsonLd />
       <section aria-labelledby="hero-heading">
         <p className="font-mono text-sm tracking-wide text-accent" lang="en">{profile.role}</p>
         <h1 id="hero-heading" className="hero-heading mt-5 font-display text-balance">{headline}</h1>
@@ -79,11 +79,9 @@ export default async function LocaleHome({ params }: PageProps<"/[locale]">) {
           {contact.title}
         </h2>
         <p className="editorial-body max-w-[60ch] text-pretty text-muted">{contact.summary}</p>
-        {contactProfiles.length > 0 && (
-          <Link href={localizedHref(locale, "contact")} className="mt-4 inline-flex min-h-11 items-center gap-2 font-medium text-accent underline underline-offset-4 hover:text-foreground">
-            {contact.action} <span aria-hidden="true">→</span>
-          </Link>
-        )}
+        <Link href={localizedHref(locale, "contact")} className="mt-4 inline-flex min-h-11 items-center gap-2 font-medium text-accent underline underline-offset-4 hover:text-foreground">
+          {contact.action} <span aria-hidden="true">→</span>
+        </Link>
       </section>
     </SiteShell>
   );

@@ -3,6 +3,7 @@ import type { Locale } from "@/lib/locales";
 export const profile = {
   name: "Leandro Sánchez",
   role: "Full Stack Software Engineer",
+  country: "Dominican Republic",
 };
 
 export const homeCopy = {

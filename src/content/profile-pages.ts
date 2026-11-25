@@ -31,7 +31,8 @@ export const contactCopy = {
     action: "Get in touch",
     profiles: "Online profiles",
     email: "Send an email",
-    resumes: "Download résumé",
+    resumes: "Résumé",
+    resumeDownload: "Download English résumé (PDF)",
   },
   es: {
     title: "Contacto",
@@ -42,15 +43,18 @@ export const contactCopy = {
     action: "Ponerse en contacto",
     profiles: "Perfiles en línea",
     email: "Enviar un correo",
-    resumes: "Descargar currículum",
+    resumes: "Currículum",
+    resumeDownload: "Descargar currículum en español (PDF)",
   },
 } satisfies Record<Locale, Record<string, string>>;
 
-// Only configure a public contact email and approved PDFs stored under public/.
-export const contactDestinations: {
-  email?: string;
-  resumes?: Partial<Record<Locale, `/${string}.pdf`>>;
-} = {};
+export const contactDestinations = {
+  email: "mrsanchez.dev@gmail.com",
+  resumes: {
+    en: "/resume/Leandro-Sanchez-CV-EN.pdf",
+    es: "/resume/Leandro-Sanchez-CV-ES.pdf",
+  } satisfies Record<Locale, `/${string}.pdf`>,
+};
 
 export const contactProfiles: readonly { name: string; href: `https://${string}` }[] = [
   { name: "LinkedIn", href: "https://do.linkedin.com/in/jsanchez-castillo" },

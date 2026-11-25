@@ -5,6 +5,7 @@ import { SiteShell } from "@/components/site-shell";
 import { experienceCopy } from "@/content/experience";
 import { profile } from "@/content/home";
 import { isLocale } from "@/lib/locales";
+import { pageMetadata } from "@/lib/seo";
 
 type ExperiencePageProps = PageProps<"/[locale]/experience">;
 
@@ -13,7 +14,7 @@ export async function generateMetadata({ params }: ExperiencePageProps): Promise
   if (!isLocale(locale)) notFound();
 
   const { title, description } = experienceCopy[locale];
-  return { title: `${title} — ${profile.name}`, description };
+  return pageMetadata(locale, "experience", `${title} — ${profile.name}`, description);
 }
 
 export default async function ExperiencePage({ params }: ExperiencePageProps) {
