@@ -7,10 +7,11 @@ function productionOrigin() {
   const configured = process.env.SITE_URL?.trim();
   if (!configured) return;
 
-  // Vercel supplies the production hostname on deployments, not on plain local builds.
-  const isLocalProduction = process.env.NODE_ENV === "production" && !process.env.VERCEL && !process.env.VERCEL_ENV;
+  // Vercel supplies the production hostname on deployments, not during local development or builds.
+  const isLocal = !process.env.VERCEL && !process.env.VERCEL_ENV &&
+    (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "production");
   const productionHost = process.env.VERCEL_PROJECT_PRODUCTION_URL ??
-    (isLocalProduction ? "mrsanchez-dev-portfolio.vercel.app" : undefined);
+    (isLocal ? "mrsanchez-dev-portfolio.vercel.app" : undefined);
 
   const url = URL.canParse(configured) ? new URL(configured) : undefined;
   const host = url?.hostname;
