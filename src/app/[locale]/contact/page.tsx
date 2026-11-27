@@ -36,7 +36,8 @@ export default async function ContactPage({ params }: ContactPageProps) {
         <p className="font-mono text-sm tracking-wide text-accent uppercase">{copy.label}</p>
         <h1 className="hero-heading mt-5 font-display text-balance">{copy.title}</h1>
         <p className="editorial-body mt-6 max-w-[60ch] text-pretty">{copy.summary}</p>
-        <p className="editorial-body mt-4 max-w-[60ch] text-pretty text-muted">{copy.consulting}</p>
+         <p className="editorial-body mt-4 max-w-[60ch] text-pretty text-muted">{copy.consulting}</p>
+         <p className="editorial-body mt-4 max-w-[60ch] text-pretty text-muted">{copy.closing}</p>
         <a href={`mailto:${contactDestinations.email}`} className="mt-6 inline-flex min-h-11 items-center gap-2 bg-accent px-4 py-2 font-medium text-background hover:bg-foreground">
           {copy.email} <span aria-hidden="true">→</span>
         </a>

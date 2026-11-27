@@ -21,7 +21,7 @@ export function SiteShell({
     { page: "experience", label: experienceCopy[locale].navLabel },
     { page: "projects", label: projectLabels[locale].nav },
     { page: "about", label: aboutCopy[locale].nav },
-    { page: "contact", label: contactCopy[locale].title },
+    { page: "contact", label: contactCopy[locale].nav },
   ] as const;
 
   return (

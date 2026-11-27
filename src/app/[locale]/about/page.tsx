@@ -29,7 +29,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
         <h1 className="hero-heading mt-5 font-display text-balance">{copy.title}</h1>
         <div className="editorial-body mt-6 max-w-[65ch] space-y-4 text-pretty text-muted">
           <p>{copy.intro}</p>
-          <p>{copy.approach}</p>
+          {copy.approach.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
         </div>
       </header>
       <TechnicalExpertise locale={locale} />

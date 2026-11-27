@@ -1,0 +1,2 @@
+[  329764ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://127.0.0.1:4179/en/contact/__next.$d$locale.contact.__PAGE__.txt?_rsc=d0Dzs-SmQ3wUw3ch:1
+[  329828ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://127.0.0.1:4179/es/contact/__next.$d$locale.contact.__PAGE__.txt?_rsc=d0Dzs-SmQ3wUw3ch:1

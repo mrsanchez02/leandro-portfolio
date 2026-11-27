@@ -1,8 +1,12 @@
 import Link from "next/link";
-import { expertise, expertiseCopy, expertiseGroups } from "@/content/expertise";
+import { expertise, expertiseCopy } from "@/content/expertise";
 import { localizedHref, type Locale } from "@/lib/locales";
 
 const sectionId = "technical-expertise";
+
+function formatSkills(skills: (typeof expertise)[number]["skills"], locale: Locale) {
+  return skills.map((item) => typeof item === "string" ? item : item[locale]).join(", ");
+}
 
 export function TechnicalExpertise({ locale, compact = false }: { locale: Locale; compact?: boolean }) {
   const copy = expertiseCopy[locale];
@@ -24,23 +28,16 @@ export function TechnicalExpertise({ locale, compact = false }: { locale: Locale
         </>
       ) : (
         <div className="grid gap-x-10 border-b border-border md:grid-cols-2">
-          {expertise.map(({ title, skills }) => (
+          {expertise.map(({ title, skills, subgroup }) => (
             <section key={title.en} className="border-t border-border py-6 md:py-8">
               <h3 className="font-display text-xl font-semibold tracking-tight">{title[locale]}</h3>
-              <dl className="mt-4 space-y-4">
-                {expertiseGroups.map((group) => {
-                  const items = skills[group];
-                  if (!items?.length) return null;
-                  return (
-                    <div key={group}>
-                      <dt className={`font-mono text-sm ${group === "applied" ? "text-accent" : "text-muted"}`}>{copy[group]}</dt>
-                      <dd className="mt-1 text-pretty">
-                        {items.map((item) => typeof item === "string" ? item : item[locale]).join(", ")}
-                      </dd>
-                    </div>
-                  );
-                })}
-              </dl>
+              <p className="mt-4 text-pretty">{formatSkills(skills, locale)}</p>
+              {subgroup && (
+                <div className="mt-4">
+                  <h4 className="font-mono text-sm text-accent">{subgroup.title[locale]}</h4>
+                  <p className="mt-1 text-pretty">{formatSkills(subgroup.skills, locale)}</p>
+                </div>
+              )}
             </section>
           ))}
         </div>
