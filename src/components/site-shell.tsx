@@ -68,7 +68,7 @@ export function SiteShell({
       <footer className="border-t border-border">
         <div className="page-container flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 py-6 text-sm text-muted">
           <p>{profile.name}</p>
-          <p className="font-mono" lang="en">{profile.role}</p>
+          <p className="font-mono">{profile.role[locale]}</p>
         </div>
       </footer>
     </>

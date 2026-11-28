@@ -8,7 +8,7 @@ const homeHref = localizedHref(defaultLocale, "home");
 const canonical = localizedUrls("home")?.[defaultLocale];
 
 export const metadata: Metadata = {
-  title: `${profile.name} — ${profile.role}`,
+  title: `${profile.name} — ${profile.role[defaultLocale]}`,
   robots: { index: false, follow: true },
   alternates: canonical ? { canonical } : undefined,
 };
@@ -17,7 +17,7 @@ export default function EntryPage() {
   return (
     <main className="page-container editorial-section">
       <h1 className="hero-heading font-display text-balance">{profile.name}</h1>
-      <p className="editorial-body mt-4 text-muted">{profile.role}</p>
+      <p className="editorial-body mt-4 text-muted">{profile.role[defaultLocale]}</p>
       <Link href={homeHref} className="mt-6 inline-flex min-h-11 items-center font-medium text-accent underline underline-offset-4 hover:text-foreground">
         Go to the homepage
       </Link>

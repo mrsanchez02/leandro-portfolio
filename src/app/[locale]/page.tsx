@@ -17,8 +17,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]">): Prom
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
 
-  const { metadataTitle, description } = homeCopy[locale];
-  return pageMetadata(locale, "home", `${profile.name} — ${metadataTitle}`, description);
+  return pageMetadata(locale, "home", `${profile.name} — ${profile.role[locale]}`, homeCopy[locale].description);
 }
 
 export default async function LocaleHome({ params }: PageProps<"/[locale]">) {
@@ -32,9 +31,9 @@ export default async function LocaleHome({ params }: PageProps<"/[locale]">) {
 
   return (
     <SiteShell locale={locale}>
-      <PersonJsonLd />
+      <PersonJsonLd locale={locale} />
       <section aria-labelledby="hero-heading">
-        <p className="font-mono text-sm tracking-wide text-accent" lang="en">{profile.role}</p>
+        <p className="font-mono text-sm tracking-wide text-accent">{profile.role[locale]}</p>
         <h1 id="hero-heading" className="hero-heading mt-5 font-display text-balance">{headline}</h1>
         <p className="editorial-body mt-6 max-w-[52ch] text-pretty text-muted">{description}</p>
         <div aria-hidden="true" className="mt-10 flex items-center gap-3 text-sm">

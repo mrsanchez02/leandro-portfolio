@@ -2,13 +2,15 @@ import type { Locale } from "@/lib/locales";
 
 export const profile = {
   name: "Leandro Sánchez",
-  role: "Full Stack Software Engineer",
+  role: {
+    en: "Full Stack Software Engineer",
+    es: "Desarrollador de Software Full Stack",
+  } satisfies Record<Locale, string>,
   country: "Dominican Republic",
 };
 
 export const homeCopy = {
   en: {
-    metadataTitle: profile.role,
     headline: "Hi, I'm Leandro.",
     description:
       "I build reliable software, connect systems, and turn complex business needs into practical solutions.",
@@ -18,7 +20,6 @@ export const homeCopy = {
     navigationLabel: "Main navigation",
   },
   es: {
-    metadataTitle: "Ingeniero de software full stack",
     headline: "Hola, soy Leandro.",
     description:
       "Desarrollo software confiable, conecto sistemas y transformo necesidades de negocio en soluciones prácticas.",
@@ -30,7 +31,6 @@ export const homeCopy = {
 } satisfies Record<
   Locale,
   {
-    metadataTitle: string;
     headline: string;
     description: string;
     languageLabel: string;

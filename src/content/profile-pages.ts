@@ -1,4 +1,5 @@
 import type { Locale } from "@/lib/locales";
+import { profile } from "./home";
 
 export const aboutCopy = {
   en: {
@@ -6,7 +7,7 @@ export const aboutCopy = {
     label: "03 / About",
     title: "About me",
     summary: "I build enterprise web and mobile applications and connect the systems behind them.",
-    intro: "I'm a Full Stack Software Engineer based in the Dominican Republic, with experience building enterprise web and mobile applications, integrating backend services, and automating business processes.",
+    intro: `I'm a ${profile.role.en} based in the Dominican Republic, with experience building enterprise web and mobile applications, integrating backend services, and automating business processes.`,
     approach: [
       "I enjoy understanding how systems work, identifying opportunities for improvement, and turning complex requirements into practical solutions.",
       "My approach is driven by maintainability, simplicity, and real-world impact. Whether I'm developing an application, connecting services, or introducing automation and AI, I focus on choosing the right solution for the problem rather than adding complexity for its own sake.",
@@ -18,7 +19,7 @@ export const aboutCopy = {
     label: "03 / Perfil",
     title: "Sobre mí",
     summary: "Desarrollo aplicaciones web y móviles empresariales e integro los sistemas que las sustentan.",
-    intro: "Soy desarrollador de software Full Stack, radicado en República Dominicana, con experiencia en aplicaciones empresariales web y móviles, integración de servicios backend y automatización de procesos de negocio.",
+    intro: `Soy ${profile.role.es}, radicado en República Dominicana, con experiencia en aplicaciones empresariales web y móviles, integración de servicios backend y automatización de procesos de negocio.`,
     approach: [
       "Disfruto entender cómo funcionan los sistemas, identificar oportunidades de mejora y transformar requerimientos complejos en soluciones prácticas.",
       "Mi enfoque prioriza la mantenibilidad, la simplicidad y los resultados reales. Ya sea desarrollando una aplicación, conectando servicios o incorporando automatización e inteligencia artificial, procuro elegir la solución adecuada para cada problema, sin añadir complejidad innecesaria.",
@@ -46,10 +47,10 @@ export const contactCopy = {
     nav: "Contacto",
     title: "Hablemos.",
     label: "05 / Contacto",
-    summary: "Me interesan las oportunidades laborales como desarrollador de software Full Stack, especialmente en equipos remotos e internacionales donde pueda contribuir al desarrollo de soluciones confiables y fáciles de mantener.",
+    summary: `Me interesan las oportunidades laborales como ${profile.role.es}, especialmente en equipos remotos e internacionales donde pueda contribuir al desarrollo de soluciones confiables y fáciles de mantener.`,
     consulting: "También estoy abierto a conversar sobre proyectos de consultoría independiente relacionados con desarrollo de software, integración de sistemas y automatización de procesos.",
     closing: "Si quieres conversar sobre alguna oportunidad, puedes escribirme.",
-    description: "Contacta a Leandro Sánchez para hablar sobre puestos de ingeniería de software o consultoría independiente.",
+    description: `Contacta a Leandro Sánchez para conversar sobre oportunidades como ${profile.role.es} o proyectos de consultoría independiente.`,
     action: "Ponerse en contacto",
     profiles: "Perfiles en línea",
     email: "Enviar un correo",
