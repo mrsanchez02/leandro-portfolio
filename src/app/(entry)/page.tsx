@@ -1,16 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { profile } from "@/content/home";
+import { homeCopy, profile } from "@/content/home";
 import { defaultLocale, localizedHref } from "@/lib/locales";
+import { pageMetadata } from "@/lib/seo";
 import { localizedUrls } from "@/lib/site-url";
 
 const homeHref = localizedHref(defaultLocale, "home");
 const canonical = localizedUrls("home")?.[defaultLocale];
+const title = `${profile.name} — ${profile.role[defaultLocale]}`;
+const { openGraph, twitter } = pageMetadata(defaultLocale, "home", title, homeCopy[defaultLocale].description);
 
 export const metadata: Metadata = {
-  title: `${profile.name} — ${profile.role[defaultLocale]}`,
+  title,
   robots: { index: false, follow: true },
   alternates: canonical ? { canonical } : undefined,
+  openGraph,
+  twitter,
 };
 
 export default function EntryPage() {
